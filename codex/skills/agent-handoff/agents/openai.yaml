@@ -1,0 +1,6 @@
+interface:
+  display_name: "Codex ↔ Claude Code Handoff"
+  short_description: "Preserve task state when switching coding agents"
+  default_prompt: "Use $agent-handoff to transfer or resume this task between Codex and Claude Code."
+policy:
+  allow_implicit_invocation: true
