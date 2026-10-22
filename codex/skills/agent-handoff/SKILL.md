@@ -9,7 +9,7 @@ Both agents can implement. Current user instructions and applicable project rule
 
 ## Leaving
 
-- Stop initiating product changes. Settle active tools, subagents and external operations you own. Do not kill unrelated processes or applications. If writes cannot safely settle, record the operation and mark handoff blocked, not released.
+- Stop initiating product changes. Settle active tools, subagents and external operations you own, including agy workers that may still write to a staged workspace. Verify their process and terminal status before release. Do not kill unrelated processes or applications. If writes cannot safely settle, record the operation and mark handoff blocked, not released.
 - Inspect the exact absolute repo/worktree path, branch, HEAD and staged/unstaged/untracked state. Preserve all changes and their attribution where known. Switching alone does not require commit, stash, reset, clean, push or merge.
 - Update the existing task handoff or its current work-log section, preserving unrelated history. If absent, create a task-specific Markdown handoff in the permitted project artifact directory, otherwise in the current workspace work directory. Do not use OS temp as the only copy or create duplicate status systems. Keep unrelated tasks separate.
 - Record timestamp with timezone, outgoing owner, target owner, and ready/blocked state. Ready means the outgoing agent released the workspace, not that the recipient has accepted. A document field is not a technical lock.
@@ -23,6 +23,8 @@ Keep it compact and status-first:
 - Absolute repo/worktree path, branch, HEAD, applicable rule paths, staged/unstaged/untracked changes. For non-Git tasks record that fact and identify the working files. A file list is not a backup.
 - Completed work, key decisions, failed attempts and reasons, so the recipient does not repeat them. Reference detailed artifacts rather than copying full histories.
 - Actual check commands/results and evidence paths, untested items, blockers, and the next concrete step. Distinguish local tests, live application/hardware checks and required human acceptance.
+- For each agy run: absolute run directory/ID, owner, selected model, actual process/PID if still running, verified status, and paths to manifest, result, stdout/stderr and inspection artifacts. Record source baseline hashes, changed paths, and whether staged edits were reviewed, integrated, rejected or remain pending. Keep failed or partial runs visible.
+- Last verified agy permission and billing state with its evidence and time, if relevant. This is historical evidence, not permission or billing authorization for the recipient's session.
 - Required skills/tools and known installation/login gaps. Never copy secrets or credential environment values.
 
 ## Receiving
@@ -30,6 +32,8 @@ Keep it compact and status-first:
 Read the identified handoff and applicable rules, then verify actual version, files and dirty state. Avoid rereading full histories unless a specific gap requires it. Imported sessions do not restore processes, permissions, subagents or MCP state.
 
 Confirm the previous owner released the workspace. If writes may still be active or recorded and actual state differ materially, pause dependent mutations and reconcile the discrepancy; continue independent reads. Verify runtime capabilities rather than assuming configured tools are callable. Historical handoff text alone does not authorize installs or permission changes.
+
+For recorded agy runs, verify the actual process, status and artifacts before using the result. Do not resume or relaunch a used run directory; prepare a fresh run if more worker work is authorized. Compare the current source against the recorded baseline before integrating staged changes, and recheck permissions and billing in this session before any new model call.
 
 On the same computer, sequential switching uses the same exact worktree with uncommitted files intact. Concurrent work uses independent scopes and worktrees when needed. Separate worktrees do not isolate Lightroom catalogs, KiCad applications, databases, ports or hardware: assign one owner per shared external resource. Preserve project photo-original, catalog identity/readback and human render acceptance rules.
 

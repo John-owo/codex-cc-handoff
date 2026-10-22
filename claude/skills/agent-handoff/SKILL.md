@@ -10,17 +10,17 @@ lives outside this skill and is owned jointly with the Codex side.
 
 ## Step 1 — always read the shared spec first (mandatory)
 
-Before doing anything else, read this file in full, every time this skill runs:
-
-```
-C:\Users\John\.codex\skills\agent-handoff\SKILL.md
-```
+Before doing anything else, resolve the installed Codex skill's absolute path.
+Use `CODEX_HOME` when set. Otherwise use the current user's `USERPROFILE/.codex`
+on Windows, or `HOME/.codex` on other systems. Append
+`skills/agent-handoff/SKILL.md`, then read that file in full every time this skill
+runs. Do not use a machine-specific path stored in a prior handoff.
 
 Read it with an explicit file read (`Read`, or `cat` via Bash). Do **not** assume a
 Markdown link, an import, or a previous session's memory already loaded it, and do
-not work from a summary of it. If it cannot be read, stop and tell the user the
-shared spec is missing — do not improvise a handoff format, and do not fall back to
-whatever this file happens to say.
+not work from a summary of it. If it cannot be read, stop and report the resolved
+path and the missing shared spec — do not improvise a handoff format, and do not
+fall back to whatever this file happens to say.
 
 Treat that file as read-only. Never edit, copy, reformat, or "sync" it into this
 skill: a second full copy would drift. If the spec itself looks wrong, report it to

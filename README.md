@@ -26,11 +26,10 @@ Target layout on the new machine:
 ~/.claude/CLAUDE.md        <- append the snippet
 ```
 
-Then **fix the absolute path**: `claude/skills/agent-handoff/SKILL.md` and the
-CLAUDE.md snippet both hardcode `C:\Users\John\.codex\skills\agent-handoff\SKILL.md`.
-If the new machine's user profile is not `C:\Users\John`, rewrite both occurrences to
-the real path, or the entry point will stop and report the shared spec as missing —
-which is the intended failure mode, not a bug.
+The Claude Code entry point resolves the Codex skill from `CODEX_HOME` when set,
+otherwise from the current user's `USERPROFILE/.codex` on Windows or `HOME/.codex`
+elsewhere. No account path needs editing. If the shared spec is missing, the entry
+point stops and reports the resolved path.
 
 Verify after install: start Claude Code and say `接續 Codex 的任務`. The skill should
 fire and the transcript should show it reading the `.codex` spec file before doing
@@ -42,3 +41,8 @@ anything else.
   The entry point references `/codex:transfer` as a **user-invoked** optional session
   import. Install it separately with `/plugin`; the handoff workflow must work without it.
 - `~/.codex/AGENTS.md` — broader personal Codex working agreements, not required here.
+
+When a task used an external worker such as agy, the handoff records its run directory,
+status, artifacts and pending integration. The receiving agent verifies those records
+against current files and processes before continuing; a handoff does not resume a
+worker session or grant its permissions.
